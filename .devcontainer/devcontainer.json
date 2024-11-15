@@ -18,7 +18,9 @@
                 "tushortz.python-extended-snippets",
                 "mgesbert.python-path",
                 "magicstack.MagicPython",
-                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter",
+                "mhutchie.git-graph",
+                "oderwat.indent-rainbow"
             ],
             "settings": {
                 // VS Code settings specific to the dev container
@@ -33,7 +35,6 @@
     "mounts": [
         "source=${localEnv:HOME}/LangChainTest,target=/workspace,type=bind,consistency=cached"
     ],
-    "onCreateCommand": "apt install -y curl git openssh-client" ,// gitやopenssh-client, 開発パッケージをインストール",
     "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "remoteUser": "synclab01"
 }

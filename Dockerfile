@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 RUN apt update && apt upgrade -y &&\
-    apt install -y mecab mecab-ipadic-utf8 libmecab-dev wget \
+    apt install -y mecab mecab-ipadic-utf8 libmecab-dev wget git openssh-client \
     fonts-ipafont-gothic fontconfig \ 
     build-essential libbz2-dev libdb-dev \
     libreadline-dev libffi-dev libgdbm-dev liblzma-dev \
