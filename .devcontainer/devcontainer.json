@@ -1,0 +1,39 @@
+{
+    "name": "Python Dev Container",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "codezombiech.gitignore",
+                "trixnz.go-to-method",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "ms-python.isort",
+                "ms-python.python",
+                "ms-python.debugpy",
+                "KevinRose.vsc-python-indent",
+                "donjayamanne.python-extension-pack",
+                "donjayamanne.python-environment-manager",
+                "tushortz.python-extended-snippets",
+                "mgesbert.python-path",
+                "magicstack.MagicPython",
+                "ms-toolsai.jupyter"
+            ],
+            "settings": {
+                // VS Code settings specific to the dev container
+            }
+        }
+    },
+    "forwardPorts": [
+        // List of ports to forward from the container to the local machine
+        8080
+    ],
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=${localEnv:HOME}/LangChainTest,target=/workspace,type=bind,consistency=cached"
+    ],
+    "onCreateCommand": "apt install -y curl git openssh-client" ,// gitやopenssh-client, 開発パッケージをインストール",
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "remoteUser": "synclab01"
+}

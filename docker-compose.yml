@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: LangChainTest/Dockerfile
+    image: langchain-python:1.0
+    container_name: langchain-app
+    env_file:
+      - .docker.env
+    volumes:
+      - .:/workspace
+    ports:
+      - 8080:8080
+    environment:
+      TZ: Asia/Tokyo
+    tty: true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+              driver: nvidia
+              count: 1
