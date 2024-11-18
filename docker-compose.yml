@@ -11,6 +11,7 @@ services:
       - .:/workspace
     ports:
       - 8080:8080
+      - 8888:8888
     environment:
       TZ: Asia/Tokyo
     tty: true

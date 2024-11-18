@@ -29,12 +29,13 @@
     },
     "forwardPorts": [
         // List of ports to forward from the container to the local machine
-        8080
+        8080,
+        8888
     ],
     "workspaceFolder": "/workspace",
     "mounts": [
         "source=${localEnv:HOME}/LangChainTest,target=/workspace,type=bind,consistency=cached"
     ],
-    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && pip3 install -r requirements.txt",
     "remoteUser": "synclab01"
 }

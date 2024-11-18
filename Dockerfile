@@ -28,14 +28,9 @@ ARG USERNAME=synclab01
 ARG GROUPNAME=synclab01
 ARG UID=1000
 ARG GID=1000
-ARG WORKDIR=/home/$USERNAME/
-ARG PROJECT_NAME=devaizu
+ARG WORKDIR=/home/$USERNAME
 RUN groupadd -g $GID $GROUPNAME && \
     useradd -m -s /bin/bash -u $UID -g $GID $USERNAME
-
-WORKDIR ${WORKDIR}
-COPY ${PROJECT_NAME}/src/requirements.txt ${WORKDIR}requirements.txt
-RUN chown -R ${USERNAME}:${GROUPNAME} ${WORKDIR}requirements.txt
 
 # Pythonのインストール
 RUN wget -P /tmp https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && tar zxvf /tmp/Python-${PYTHON_VERSION}.tgz -C /tmp/ && \
@@ -43,15 +38,6 @@ RUN wget -P /tmp https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PY
     make && make install
 
 # 環境変数の追加
-ENV PATH="/usr/local/python/bin:${PATH}"
-
-# libreofficeのインストール
-# COPY ${PROJECT_NAME}/LibreOffice_24.8.0_Linux_x86-64_deb.tar.gz /tmp/LibreOffice_24.8.0_Linux_x86-64_deb.tar.gz
-# RUN tar xvfz /tmp/LibreOffice_24.8.0_Linux_x86-64_deb.tar.gz -C /tmp
-# RUN dpkg -i /tmp/LibreOffice_24.8.0.3_Linux_x86-64_deb/DEBS/*.deb
+ENV PATH="${WORKDIR}/.local/bin:${PATH}"
 
 USER $USERNAME
-
-# 先にtorchをインストールしてからでないとflash-attnがインストールできない
-# RUN pip3 install -r ${WORKDIR}requirements.txt
-# RUN /usr/local/python/bin/pip3 install flash-attn==2.6.3
